@@ -1,0 +1,30 @@
+.gridContainer {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    justify-content: center;
+    grid-gap: 10px;
+    padding: 30px;
+}
+
+.left, .right{
+    justify-self: center;
+}
+
+
+.gameBoard {
+    display: grid;
+    grid-template-columns: 16% 16% 16% 16% 16% 16%;
+    grid-template-rows: 16% 16% 16% 16% 16% 16%;;
+    grid-gap: 5px;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    border: 1px solid black;
+    padding: 7px;
+    width: 45vw;
+    height: 45vw;
+}
+
+.timeNum{
+    color: orange;
+}
