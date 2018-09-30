@@ -20,3 +20,6 @@ This is a memory game, developed using React, Ant Design, webpack, and CSS grid,
 - Tracking Best Score
 - Tracking time
 - Adjustable number of cards in the game (difficulty levels)
+
+## Layout & Logic
+<img width="400" alt="workflow.png" src="https://github.com/caomingkai/Memory-Game/raw/master/IMG_4519.JPG">
