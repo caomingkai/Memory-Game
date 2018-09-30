@@ -13,6 +13,7 @@ This is a memory game, developed using React, Ant Design, webpack, and CSS grid,
 ## Features
 
 - Notify the user if they win or lose
+- Hints assistance
 - Allow the user to reset at any time
 - Randomize the ‘cards’ layout every game
 - Multi Player mode
@@ -23,3 +24,9 @@ This is a memory game, developed using React, Ant Design, webpack, and CSS grid,
 
 ## Layout & Logic
 <img width="600" alt="workflow.png" src="https://github.com/caomingkai/Memory-Game/raw/master/IMG_4519.JPG">
+
+
+## Todo
+
+- Options & Start UI substitute the game board UI at the beginning
+- Hint feature: add keyboard press event

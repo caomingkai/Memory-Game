@@ -9,7 +9,7 @@ const RadioGroup = Radio.Group
 const DEFAULT_CARD_NUM = 18
 const DEFAULT_PLAYER_NUM = 1
 const BEST_SCORE= 999
-
+const THOUSAND = 1000
 
 class Game extends React.Component {
     constructor(){
@@ -41,8 +41,8 @@ class Game extends React.Component {
         if(this.timeHandler) return
         this.randomizeCards()
         this.timeHandler = setInterval(()=>{
-            this.setState({ time_elapsed: this.state.time_elapsed + 1000 })
-        },1000)
+            this.setState({ time_elapsed: this.state.time_elapsed + THOUSAND })
+        },THOUSAND)
     }
 
     randomizeCards = ()=>{
@@ -139,10 +139,10 @@ class Game extends React.Component {
 
     // heler-2 for check(): check if already win
     checkIfWin = ()=>{
-        const {num_of_cards_left, num_of_players, score_of_p1, score_of_p2 } = this.state
+        const {num_of_cards_left, num_of_players, is_p1_playing, score_of_p1, score_of_p2, time_elapsed } = this.state
         if (num_of_cards_left===1){
             clearTimeout(this.timeHandler)
-            let min_history, min
+            let min_history, min, notificationTitle, notificationBody
             if (num_of_players === 2){
                 min_history = localStorage.getItem("best_score_two_players")
                 min = score_of_p1< score_of_p2 ? score_of_p1 : score_of_p2
@@ -150,15 +150,20 @@ class Game extends React.Component {
                     localStorage.setItem("best_score_two_players", min)
                     this.setState({ best_score: min })
                 }
-                Modal.success({ title: is_p1_playing ? 'Player 1 win!' : 'Player 2 win!'})
+                notificationTitle = min===score_of_p1 ? 'Player 1 win!' : 'Player 2 win!'
             }else{
                 min_history = localStorage.getItem("best_score_one_player")
-                if ( min_history === null || ( min_history !== null && score_of_p1 < Number(min_history) )) {
-                    localStorage.setItem("best_score_one_player", score_of_p1)
-                    this.setState({ best_score:  score_of_p1 })
+                min = score_of_p1
+                if ( min_history === null || ( min_history !== null && min < Number(min_history) )) {
+                    localStorage.setItem("best_score_one_player", min)
+                    this.setState({ best_score:  min })
                 }
-                Modal.success({ title: 'You win!'})
+                notificationTitle =  'You win!'
             }
+
+            notificationBody = <div><div>Time: {`${time_elapsed/THOUSAND} ses`}</div><div>Score: {min}</div></div>
+            Modal.success({ title: notificationTitle, content: notificationBody })
+
         }
     }
 
@@ -188,7 +193,7 @@ class Game extends React.Component {
                     </RadioGroup>
                 </div>
                 <div>Card Num: <InputNumber disabled={time_elapsed>0} min={1} max={num_of_cards} value={num_of_cards} onChange={(val)=>{this.setCardNum(val)}} /></div><br />
-                <Button type="primary" onClick={this.start} block>Start</Button><br />    <br />
+                <Button type="primary" onClick={this.start} block disabled={time_elapsed>0} >Start</Button><br />    <br />
                 <Button type="primary" onClick={this.reset} block>Reset</Button>
             </Card>
         )
@@ -197,7 +202,7 @@ class Game extends React.Component {
         // 3. statisticInfo
         const statisticInfo=(
             <Card title="Statistic Information">
-                <div className="timeElapsed"><b>Time Elapsed :</b> <span className="timeNum">{time_elapsed/1000}</span> sec </div>
+                <div className="timeElapsed"><b>Time Elapsed :</b> <span className="timeNum">{time_elapsed/THOUSAND}</span> sec </div>
                 <div className="highstScore"><b>Highest Score: </b>{best_score}</div>
             </Card>
         )
