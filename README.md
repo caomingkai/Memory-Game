@@ -4,6 +4,8 @@
 
 This is a memory game, developed using React, Ant Design, webpack, and CSS grid, etc.
 
+<img width="600" alt="memory_game.png" src="https://github.com/caomingkai/Memory-Game/raw/master/memory_game.png">
+
 ## How to run
 
 1. git clone
@@ -22,11 +24,13 @@ This is a memory game, developed using React, Ant Design, webpack, and CSS grid,
 - Tracking time
 - Adjustable number of cards in the game (difficulty levels)
 
+## To-do
+
+- Options & Start UI substitute the game board UI at the beginning
+- Hint feature: add keyboard press event
+
 ## Layout & Logic
 <img width="600" alt="workflow.png" src="https://github.com/caomingkai/Memory-Game/raw/master/IMG_4519.JPG">
 
 
-## Todo
 
-- Options & Start UI substitute the game board UI at the beginning
-- Hint feature: add keyboard press event
