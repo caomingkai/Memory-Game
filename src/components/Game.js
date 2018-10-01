@@ -30,7 +30,7 @@ class Game extends React.Component {
     }
 
     componentDidMount(){
-        this.randomizeCards()
+        // this.randomizeCards()
         const {num_of_players, best_score} = this.state
         const min_history  = num_of_players===1 ? localStorage.getItem("best_score_one_player") : localStorage.getItem("best_score_two_players")
         this.setState({best_score:  min_history !== null ? min_history : best_score  })
@@ -60,7 +60,7 @@ class Game extends React.Component {
             score_of_p1: 0, score_of_p2: 0, is_p1_playing: true,
             cards: [], uncovered_two_cards_idx: [], hintIdxPair:[]
         })
-        this.randomizeCards()
+        // this.randomizeCards()
     }
 
     setCardNum = (val)=>{ this.setState({num_of_cards: val}) }
@@ -150,7 +150,7 @@ class Game extends React.Component {
                     localStorage.setItem("best_score_two_players", min)
                     this.setState({ best_score: min })
                 }
-                notificationTitle = min===score_of_p1 ? 'Player 1 win!' : 'Player 2 win!'
+                notificationTitle = score_of_p1===score_of_p2 ? 'Draw Game!' : (min===score_of_p1 ? 'Player 1 win!' : 'Player 2 win!')
             }else{
                 min_history = localStorage.getItem("best_score_one_player")
                 min = score_of_p1
